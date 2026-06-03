@@ -406,16 +406,21 @@
         function changeLanguage(lang) {
             if(!translations[lang]) return;
             const t = translations[lang];
+            
+            // Traducciones de la marca y menú de navegación
             document.getElementById('nav-brand-main').innerText = t.brandMain;
             document.getElementById('nav-brand-sub').innerText = t.brandSub;
             document.getElementById('nav-inicio').innerText = t.navInicio;
             document.getElementById('nav-nosotros').innerText = t.navNosotros;
             document.getElementById('nav-servicios').innerText = t.navServicios;
             document.getElementById('nav-contacto').innerText = t.navContacto;
+            
+            // Traducciones de la sección Portada (Hero)
             document.getElementById('hero-title').innerText = t.heroTitle;
             document.getElementById('hero-desc').innerText = t.heroDesc;
             document.getElementById('hero-btn').innerText = t.heroBtn;
             
+            // Traducciones de la sección Nosotros
             document.getElementById('about-title').innerHTML = `<i class="bi bi-bank" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>${t.aboutTitle}`;
             document.getElementById('about-sub-firm').innerText = t.aboutSubFirm;
             document.getElementById('about-text').innerText = t.aboutText;
@@ -423,6 +428,8 @@
             document.getElementById('about-mision-desc').innerText = t.aboutMisionDesc;
             document.getElementById('about-vision-title').innerText = t.aboutVisionTitle;
             document.getElementById('about-vision-desc').innerText = t.aboutVisionDesc;
+            
+            // Traducciones de los Pilares Éticos (Valores)
             document.getElementById('values-main-title').innerText = t.valuesMainTitle;
             document.getElementById('val1-title').innerText = t.val1Title;
             document.getElementById('val1-desc').innerText = t.val1Desc;
@@ -433,6 +440,7 @@
             document.getElementById('val4-title').innerText = t.val4Title;
             document.getElementById('val4-desc').innerText = t.val4Desc;
             
+            // Traducciones de la sección Servicios (Tarjetas)
             document.getElementById('services-title').innerHTML = `<i class="bi bi-briefcase" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>${t.servicesTitle}`;
             document.getElementById('srv1-title').innerText = t.srv1Title;
             document.getElementById('srv1-desc').innerText = t.srv1Desc;
@@ -453,6 +461,7 @@
             document.getElementById('srv9-title').innerText = t.srv9Title;
             document.getElementById('srv9-desc').innerText = t.srv9Desc;
             
+            // Traducciones de la sección Contacto
             document.getElementById('contact-title').innerHTML = `<i class="bi bi-geo-alt" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>${t.contactTitle}`;
             document.getElementById('contact-subtitle').innerText = t.contactSubtitle;
             document.getElementById('c-dir').innerHTML = "📍 " + t.cDir.replace("📍 ", "");
@@ -461,8 +470,31 @@
             document.getElementById('c-hor-val').innerText = t.cHorVal;
             document.getElementById('contact-box-title').innerText = t.contactBoxTitle;
             document.getElementById('contact-box-desc').innerHTML = t.contactBoxDesc;
+            
+            // Traducciones del Pie de Página (Footer)
             document.getElementById('foot-copy').innerText = t.footCopy;
             document.getElementById('foot-law').innerText = t.footLaw;
+
+            // ==================================================================
+            // LÓGICA AUTOMÁTICA: CIERRA EL MENÚ DESPLEGABLE EN PANTALLAS MÓVILES
+            // ==================================================================
+            const navbarCollapse = document.getElementById('navbarNav');
+            
+            // Si el menú existe y está abierto (tiene la clase 'show' de Bootstrap)
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                // Cierre estándar usando la librería jQuery (Para Bootstrap 4)
+                if (typeof $ !== 'undefined') {
+                    $('#navbarNav').collapse('hide');
+                } else {
+                    // Cierre alternativo en JavaScript puro (Para Bootstrap 5)
+                    navbarCollapse.classList.remove('show');
+                    const toggler = document.querySelector('.navbar-toggler');
+                    if (toggler) {
+                        toggler.setAttribute('aria-expanded', 'false');
+                        toggler.classList.add('collapsed');
+                    }
+                }
+            }
         }
     </script>
 </body>
