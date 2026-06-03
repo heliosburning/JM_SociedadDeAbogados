@@ -37,7 +37,8 @@
                     <span style="color: #FFFFFF;" id="nav-brand-main">JURÍDICO</span> 
                     <span id="nav-brand-sub" style="color: var(--verde-pastel); font-weight: 300;">MICHOACÁN</span>
                 </div>
-                <small class="text-uppercase tracking-wide" style="color: var(--dorado-pastel); font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; margin-top: 2px;">
+                <!-- Añadimos id="nav-brand-tag" para poder traducirlo -->
+                <small id="nav-brand-tag" class="text-uppercase tracking-wide" style="color: var(--dorado-pastel); font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; margin-top: 2px;">
                     Sociedad de Abogados
                 </small>
             </a>
@@ -329,7 +330,9 @@
         /* Banco de datos para traducciones completas (Inyectando HTML para retener los enlaces e íconos) */
         const translations = {
             es: {
-                brandMain: "JURÍDICO", brandSub: "MICHOACÁN",
+                brandMain: "JURÍDICO",
+                brandSub: "MICHOACÁN",
+                brandTag: "Sociedad de Abogados",
                 navInicio: "Inicio", navNosotros: "Nosotros", navServicios: "Servicios", navContacto: "Contacto",
                 heroTitle: "Defendemos Sus Derechos", heroDesc: "Experiencia, confidencialidad y compromiso legal a su servicio. Brindamos soluciones estratégicas con un lenguaje claro y transparente.", heroBtn: "Agendar Asesoría",
                 aboutTitle: "Quiénes Somos", aboutSubFirm: "Nuestra Firma", aboutText: "Somos un despacho jurídico comprometido con la excelencia y la justicia. Nuestro equipo de profesionales cuenta con una sólida trayectoria ofreciendo asesoría legal personalizada tanto a personas físicas como morales, rigiéndonos bajo los más altos estándares éticos de confidencialidad y honestidad.",
@@ -353,7 +356,9 @@
                 footLaw: "Consulte nuestro Aviso de Privacidad | Rigiéndonos bajo las leyes de Michoacán, México."
             },
             en: {
-                brandMain: "MICHOACÁN", brandSub: "LAW FIRM",
+                brandMain: "JURÍDICO",
+                brandSub: "MICHOACÁN",
+                brandTag: "Law Firm",
                 navInicio: "Home", navNosotros: "About Us", navServicios: "Services", navContacto: "Contact",
                 heroTitle: "We Defend Your Rights", heroDesc: "Experience, confidentiality, and legal commitment at your service. We provide strategic solutions using clear and transparent language.", heroBtn: "Schedule Consultation",
                 aboutTitle: "About Us", aboutSubFirm: "Our Firm", aboutText: "We are a law firm committed to excellence and justice. Our team of professionals has a solid track record offering personalized legal counsel to both individuals and corporations, guided by the highest ethical standards of confidentiality and honesty.",
@@ -377,7 +382,9 @@
                 footLaw: "Review our Privacy Policy | Governed under the laws of Michoacán, Mexico."
             },
             pua: {
-                brandMain: "JURÍDICO", brandSub: "MICHUAKANI",
+                brandMain: "JURÍDICO",
+                brandSub: "MICHOACÁN",
+                brandTag: "Majuchekunha Karhanchiri",
                 navInicio: "Uárhini", navNosotros: "Jucha", navServicios: "Anhatapu", navContacto: "Uandani",
                 heroTitle: "Jucha Kuajpikuasïche Chari Kuarhengorhuani", heroDesc: "Ekuatsïperakua juchari k'uanhatsekuarhu. Jucha intsïspekuasïche ambakiti uandakua jimbó t'u uandantskuani sïmarhu.", heroBtn: "Uandantskueri P'orhemperakua",
                 aboutTitle: "Nena Juchá Esku", aboutSubFirm: "Juchari Anchiku", aboutText: "Juchá k'uájperakua uaxastakatirhesï ambakiti sesikua jimbó. Juchari uandari jorhenkuatisï sesi uandaxatisï iámarhu k'uiripuni nena sesikua echerhi jimbó p'orhemperakua jimbó k'uanhatsekuarhu uandakua.",
@@ -410,6 +417,7 @@
             // Traducciones de la marca y menú de navegación
             document.getElementById('nav-brand-main').innerText = t.brandMain;
             document.getElementById('nav-brand-sub').innerText = t.brandSub;
+            document.getElementById('nav-brand-tag').innerText = t.brandTag; // <--- TRADUCCIÓN AGREGADA
             document.getElementById('nav-inicio').innerText = t.navInicio;
             document.getElementById('nav-nosotros').innerText = t.navNosotros;
             document.getElementById('nav-servicios').innerText = t.navServicios;
@@ -480,13 +488,10 @@
             // ==================================================================
             const navbarCollapse = document.getElementById('navbarNav');
             
-            // Si el menú existe y está abierto (tiene la clase 'show' de Bootstrap)
             if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                // Cierre estándar usando la librería jQuery (Para Bootstrap 4)
                 if (typeof $ !== 'undefined') {
                     $('#navbarNav').collapse('hide');
                 } else {
-                    // Cierre alternativo en JavaScript puro (Para Bootstrap 5)
                     navbarCollapse.classList.remove('show');
                     const toggler = document.querySelector('.navbar-toggler');
                     if (toggler) {
