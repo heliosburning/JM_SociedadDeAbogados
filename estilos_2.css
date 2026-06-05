@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ESTILOS_2.CSS - IDENTIDAD VISUAL PREMIUM (OPTIMIZADO MÓVIL & MULTILINGÜE)
+   ESTILOS_2.CSS - COMPATIBILIDAD PREMIUM & TIPOGRAFÍA FLUIDA (OPCIÓN B)
    ========================================================================== */
 
 :root {
@@ -12,7 +12,7 @@
     --gris-subtil: #707573;
 }
 
-/* Configuración global del scroll y tipografía corporativa */
+/* Configuración global del scroll y control de desbordamiento por palabras largas */
 html {
     scroll-behavior: smooth;
 }
@@ -23,27 +23,30 @@ body {
     background-color: var(--blanco-fondo);
     color: var(--negro-texto);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Evita desbordamiento horizontal global */
+}
+
+/* Regla crítica para que el Purhépecha no rompa los contenedores en pantallas pequeñas */
+p, h1, h2, h3, h4, h5, .nav-link, .btn, span, small {
+    hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4, h5, .titulo-secciones {
     font-family: "Artifakt Element", "Segoe UI", Roboto, sans-serif;
     font-weight: 700;
     letter-spacing: -0.3px;
-    word-wrap: break-word;
-    word-break: break-word; /* Protege títulos largos en Purhépecha */
 }
 
-/* Arquitectura de secciones */
+/* Arquitectura de secciones estándar */
 .secciones {
     min-height: 100vh; 
-    padding: clamp(5rem, 8vh, 8.5rem) 1rem 4.5rem 1rem; 
+    padding: 8.5rem 1.5rem 4.5rem 1.5rem; 
     background-color: var(--blanco-fondo);
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    box-sizing: border-box;
 }
 
 .secciones-alternas {
@@ -53,7 +56,7 @@ h1, h2, h3, h4, h5, .titulo-secciones {
 .titulo-secciones {
     color: var(--negro-texto);
     text-align: center;
-    font-size: clamp(20px, 4vw, 26px); /* Tamaño adaptativo según pantalla */
+    font-size: 26px;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
     width: 100%;
@@ -71,12 +74,12 @@ hr.linea-decorativa {
 .info-bar {
     background-color: var(--negro-solido); 
     color: #A0A5A3; 
-    padding: 0 15px;
+    padding: 0 20px;
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     height: 40px;
-    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    font-size: 0.8rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -87,18 +90,16 @@ hr.linea-decorativa {
 
 .social-icons a {
     color: #A0A5A3; 
-    margin-left: 14px; 
+    margin-left: 18px; 
     transition: color 0.3s ease;
     text-decoration: none !important;
 }
 
-@media (hover: hover) {
-    .social-icons a:hover {
-        color: var(--dorado-pastel);
-    }
+.social-icons a:hover {
+    color: var(--dorado-pastel);
 }
 
-/* Estructura del menú de navegación principal */
+/* Estructura del menú de navegación principal (Bootstrap 5) */
 .navbar {
     background-color: var(--negro-solido) !important; 
     position: absolute;
@@ -112,7 +113,7 @@ hr.linea-decorativa {
 
 .navbar-brand {
     color: #FFFFFF !important; 
-    font-size: clamp(0.9rem, 3vw, 1.05rem);
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem) !important; /* Ajuste proporcional del logo */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -129,15 +130,14 @@ hr.linea-decorativa {
     text-decoration: none !important;
 }
 
-@media (hover: hover) {
-    .navbar-nav .nav-link:hover, .nav-item.active .nav-link {
-        color: var(--dorado-pastel) !important; 
-    }
+.navbar-nav .nav-link:hover, .nav-item.active .nav-link {
+    color: var(--dorado-pastel) !important; 
 }
 
 .navbar-toggler {
     border-color: #2D302F; 
     padding: 4px 8px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .navbar-toggler-icon {
@@ -150,38 +150,62 @@ hr.linea-decorativa {
     color: #FFFFFF;
     border: 1px solid #2D302F;
     border-radius: 4px;
-    padding: 6px 10px;
+    padding: 4px 8px;
     font-size: 0.8rem;
     outline: none;
     cursor: pointer;
     font-weight: 600;
     letter-spacing: 0.5px;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Portada de bienvenida (Hero) ajustada con JM_Uno.png */
+/* ==========================================================================
+   PORTADA DE BIENVENIDA (HERO) CON TIPOGRAFÍA FLUIDA Y PROPORCIONAL
+   ========================================================================== */
 .hero {
-    background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.85)), 
+    background: linear-gradient(rgba(17, 17, 17, 0.78), rgba(17, 17, 17, 0.88)), 
                 url('JM_Uno.png') no-repeat center center/cover;
     min-height: 100vh;
-    height: auto; /* Permite crecer si el contenido lo requiere en pantallas muy pequeñas */
+    height: auto;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #FFFFFF;
-    padding: 100px 1rem 40px 1rem;
+    padding: 130px 20px 80px 20px; /* Colchón para evitar colisiones en iPhone Mini */
     box-sizing: border-box;
 }
 
-/* Ajuste del display-4 de Bootstrap para que sea adaptativo */
-.hero h1.display-4 {
-    font-size: clamp(1.8rem, 5vw, 3.5rem) !important;
+.hero .container {
+    max-width: 100%;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-.hero p.lead {
-    font-size: clamp(0.95rem, 2.5vw, 1.25rem) !important;
-    word-wrap: break-word;
+/* El título se encoge proporcionalmente según el ancho de la pantalla */
+#hero-title {
+    color: #FFFFFF;
+    font-size: clamp(1.65rem, 4.5vw, 3.2rem) !important;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Botón de asesoría */
+/* La descripción guarda la misma proporción visual */
+#hero-desc {
+    color: #CCCCCC;
+    font-size: clamp(0.95rem, 2vw, 1.2rem) !important;
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Botón de asesoría interactivo */
 .btn-interactivo {
     font-family: "Artifakt Element", "Segoe UI", Roboto, sans-serif;
     font-weight: 900; 
@@ -190,26 +214,51 @@ hr.linea-decorativa {
     background-color: var(--verde-pastel);
     color: #FFFFFF !important;
     border: 2px solid var(--verde-pastel);
-    padding: clamp(10px, 2vw, 14px) clamp(24px, 4vw, 38px);
-    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    padding: 14px 38px;
+    font-size: 0.85rem;
     border-radius: 4px;
     margin: 15px 0; 
     display: inline-block;
     box-shadow: 0 4px 10px rgba(135, 169, 156, 0.15);
     text-decoration: none !important;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
+/* ==========================================================================
+   SOLUCIÓN AL STICKY HOVER PARA COMPATIBILIDAD CON DISPOSITIVOS MÓVILES (iOS/Android)
+   ========================================================================== */
+
+/* Solo ejecuta efectos Hover si el dispositivo tiene un puntero real (Mouse) */
 @media (hover: hover) {
     .btn-interactivo:hover {
         background-color: #FFFFFF;
         color: var(--verde-pastel) !important; 
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-        text-decoration: none !important;
+        transform: translateY(-2px);
+    }
+    .float-wa:hover, .scroll-to-top:hover { 
+        background-color: #FFFFFF; 
+        color: var(--verde-pastel) !important; 
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
     }
 }
 
-/* Tarjetas de servicios optimizadas contra desbordamientos */
+/* Comportamiento al hacer "Tap" (Tocar el botón en el iPhone) */
+.btn-interactivo:active, .float-wa:active, .scroll-to-top:active {
+    transform: scale(0.95);
+    background-color: var(--dorado-pastel) !important;
+    border-color: var(--dorado-pastel) !important;
+    color: #111111 !important;
+}
+
+/* ==========================================================================
+   TARJETAS Y ELEMENTOS DE SECCIONES (COMPATIBILIDAD DE CONTENEDORES)
+   ========================================================================== */
+
+/* Tarjetas de servicios alineadas equitativamente */
 .card-custom {
     background-color: #FFFFFF;
     color: var(--negro-texto);
@@ -218,27 +267,17 @@ hr.linea-decorativa {
     border-radius: 4px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.012);
     transition: all 0.3s ease;
-    padding: clamp(1.2rem, 3vw, 1.8rem) !important;
-    height: 100%; /* Asegura consistencia en rejillas de Bootstrap */
-    box-sizing: border-box;
-    word-wrap: break-word;
-    word-break: break-word; /* Rompe correctamente palabras largas en Purhépecha */
+    padding: 1.8rem 1.4rem !important;
+    height: 100%; /* Obliga a todas las tarjetas a medir exactamente lo mismo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.card-custom h5 {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-}
-
-.card-custom p {
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-}
-
-@media (hover: hover) {
-    .card-custom:hover {
-        transform: translateY(-4px);
-        border-top-color: var(--dorado-pastel);
-        box-shadow: 0 8px 22px rgba(0,0,0,0.04);
-    }
+.card-custom:hover {
+    transform: translateY(-4px);
+    border-top-color: var(--dorado-pastel);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.04);
 }
 
 /* Bloque de valores */
@@ -246,22 +285,15 @@ hr.linea-decorativa {
     border: 1px solid #E6EAE8;
     border-radius: 4px;
     background: #FFFFFF;
-    padding: clamp(1.2rem, 3vw, 1.8rem);
+    padding: 1.8rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.01);
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .valor-item h5 {
     color: var(--verde-pastel);
-    font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+    font-size: 1.05rem;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-}
-
-.valor-item p {
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-    word-wrap: break-word;
 }
 
 /* Enlace in-text de WhatsApp */
@@ -272,14 +304,12 @@ hr.linea-decorativa {
     transition: color 0.2s ease;
 }
 
-@media (hover: hover) {
-    .link-texto-wa:hover {
-        color: #5d7e71;
-        text-decoration: underline;
-    }
+.link-texto-wa:hover {
+    color: #5d7e71;
+    text-decoration: underline;
 }
 
-/* Contenedor del mapa */
+/* Contenedor adaptativo del mapa */
 .contenedor_elementos {
     border-radius: 4px;
     overflow: hidden;
@@ -289,7 +319,7 @@ hr.linea-decorativa {
     margin-top: 2.5rem;
 }
 
-/* Botones flotantes unificados con fijación de toques para móviles */
+/* Botones flotantes unificados */
 .float-wa {
     position: fixed;
     width: 48px;
@@ -303,26 +333,17 @@ hr.linea-decorativa {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     border: 2px solid var(--verde-pastel); 
     text-decoration: none !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    -webkit-tap-highlight-color: transparent; /* Quita el recuadro gris al pulsar en iOS */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .float-wa i {
     font-size: 1.2rem; 
     line-height: 1;
-}
-
-/* Solo aplica efectos visuales si el dispositivo soporta puntero físico */
-@media (hover: hover) {
-    .float-wa:hover { 
-        background-color: #FFFFFF; 
-        color: var(--verde-pastel) !important; 
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-        text-decoration: none !important;
-    }
 }
 
 .scroll-to-top {
@@ -338,13 +359,14 @@ hr.linea-decorativa {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     border: 2px solid var(--verde-pastel); 
     text-decoration: none !important;
-    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
     opacity: 0;
     visibility: hidden;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .scroll-to-top i {
@@ -352,26 +374,17 @@ hr.linea-decorativa {
     line-height: 1;
 }
 
-@media (hover: hover) {
-    .scroll-to-top:hover { 
-        background-color: #FFFFFF; 
-        color: var(--verde-pastel) !important; 
-        text-decoration: none !important;
-    }
-}
-
 .scroll-to-top.show {
     opacity: 1;
     visibility: visible;
 }
 
-/* Pie de página */
+/* Pie de página corporativo */
 footer {
     background-color: var(--negro-solido);
     padding: 2.2rem 1.5rem;
     color: #858A88;
-    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    font-size: 0.85rem;
     border-top: 1px solid #1E201F;
     width: 100%;
-    box-sizing: border-box;
 }
