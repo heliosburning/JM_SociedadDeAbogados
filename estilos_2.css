@@ -309,37 +309,14 @@ hr.linea-decorativa {
     text-decoration: underline;
 }
 
-/* Contenedor adaptativo del mapa con diseño de tarjeta flotante */
+/* Contenedor adaptativo del mapa */
 .contenedor_elementos {
-    border-radius: 8px; /* Bordes un poco más redondeados para suavizar */
+    border-radius: 4px;
     overflow: hidden;
     width: 100%;
-    height: 45vh; /* Le damos un poco más de presencia visual */
+    height: 40vh;
     border: 1px solid #E6EAE8;
     margin-top: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); /* Sombra suave institucional */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contenedor_elementos:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-}
-
-/* Filtro estético premium para el mapa de Google */
-.mapa {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    /* Convertimos el mapa a escala de grises y aumentamos sutilmente el contraste */
-    filter: grayscale(100%) invert(92%) contrast(110%) hue-rotate(140deg);
-    transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Cuando el usuario interactúa, el mapa recupera su color de forma elegante */
-.contenedor_elementos:hover .mapa,
-.mapa:focus {
-    filter: grayscale(0%) invert(0%) contrast(100%) hue-rotate(0deg);
 }
 
 /* Botones flotantes unificados */
