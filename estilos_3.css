@@ -1,0 +1,441 @@
+/* ==========================================================================
+   IDENTIDAD VISUAL PREMIUM - JURÍDICO MICHOACÁN (OPTIMIZADO MÓVIL & MAPAS)
+   ========================================================================== */
+
+:root {
+    --negro-solido: #111111;
+    --verde-pastel: #87A99C;         
+    --dorado-pastel: #DBC08D;        
+    --blanco-fondo: #FFFFFF;    
+    --gris-pastel-claro: #F5F7F6;   
+    --negro-texto: #222524;         
+    --gris-subtil: #707573;
+}
+
+/* Configuración de Comportamiento del Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Artifakt Element", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--blanco-fondo);
+    color: var(--negro-texto);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, .titulo-secciones {
+    font-family: "Artifakt Element", "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Arquitectura Modular de Secciones */
+.secciones {
+    min-height: 100vh; 
+    padding: clamp(5rem, 8vh, 8.5rem) 1rem 4.5rem 1rem; 
+    background-color: var(--blanco-fondo);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.secciones-alternas {
+    background-color: var(--gris-pastel-claro);
+}
+
+.titulo-secciones {
+    color: var(--negro-texto);
+    text-align: center;
+    font-size: clamp(20px, 4vw, 26px);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    width: 100%;
+}
+
+hr.linea-decorativa {
+    border: none;
+    height: 2px;
+    width: 40px;
+    background-color: var(--verde-pastel);
+    margin: 0 auto 3.5rem auto;
+}
+
+/* Barra Superior de Contacto */
+.info-bar {
+    background-color: var(--negro-solido); 
+    color: #A0A5A3; 
+    padding: 0 15px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    height: 40px;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
+    border-bottom: 1px solid #1E201F;
+}
+
+.social-icons a {
+    color: #A0A5A3; 
+    margin-left: 14px; 
+    transition: color 0.3s ease;
+    text-decoration: none !important;
+}
+
+@media (hover: hover) {
+    .social-icons a:hover {
+        color: var(--dorado-pastel);
+    }
+}
+
+/* Barra de Navegación */
+.navbar {
+    background-color: var(--negro-solido) !important; 
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid #1E201F !important;
+    padding: 12px 1rem;
+}
+
+.navbar-brand {
+    color: #FFFFFF !important; 
+    font-size: clamp(0.9rem, 3vw, 1.05rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none !important;
+}
+
+.navbar-nav .nav-link {
+    color: #CCCCCC !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.5rem 1.1rem !important;
+    transition: color 0.2s ease;
+    text-decoration: none !important;
+}
+
+@media (hover: hover) {
+    .navbar-nav .nav-link:hover, .nav-item.active .nav-link {
+        color: var(--dorado-pastel) !important; 
+    }
+}
+
+.navbar-toggler {
+    border-color: #2D302F; 
+    padding: 4px 8px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); 
+}
+
+/* Selector de Idiomas */
+.lang-select {
+    background: #1A1C1B;
+    color: #FFFFFF;
+    border: 1px solid #2D302F;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Portada Institucional (Hero) */
+.hero {
+    background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.85)), 
+                url('JM_TRES.PNG') no-repeat center center/cover;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    padding: 100px 1rem 40px 1rem;
+    box-sizing: border-box;
+}
+
+.hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3.5rem) !important;
+}
+
+.hero p {
+    font-size: clamp(0.95rem, 2.5vw, 1.25rem) !important;
+    word-wrap: break-word;
+}
+
+/* Botones de Acción */
+.btn-interactivo {
+    font-family: "Artifakt Element", "Segoe UI", Roboto, sans-serif;
+    font-weight: 900; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: var(--verde-pastel);
+    color: #FFFFFF !important;
+    border: 2px solid var(--verde-pastel);
+    padding: clamp(10px, 2vw, 14px) clamp(24px, 4vw, 38px);
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    border-radius: 4px;
+    margin: 15px 0; 
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(135, 169, 156, 0.15);
+    text-decoration: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+@media (hover: hover) {
+    .btn-interactivo:hover {
+        background-color: #FFFFFF;
+        color: var(--verde-pastel) !important; 
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* Rejilla de Tarjetas de Servicios */
+.card-custom {
+    background-color: #FFFFFF;
+    color: var(--negro-texto);
+    border: 1px solid #E6EAE8;
+    border-top: 4px solid var(--verde-pastel); 
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.012);
+    transition: all 0.3s ease;
+    padding: clamp(1.2rem, 3vw, 1.8rem) !important;
+    height: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+@media (hover: hover) {
+    .card-custom:hover {
+        transform: translateY(-4px);
+        border-top-color: var(--dorado-pastel);
+        box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+    }
+}
+
+/* Contenedores de Valores */
+.bloque-valores {
+    border: 1px solid #E6EAE8;
+    border-radius: 4px;
+    background: #FFFFFF;
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.valor-item h5 {
+    color: var(--verde-pastel);
+    font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.link-texto-wa {
+    color: var(--verde-pastel);
+    font-weight: 700;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+    .link-texto-wa:hover {
+        color: #5d7e71;
+    }
+}
+
+/* Contenedor Avanzado del Mapa Interactivo */
+.contenedor_elementos {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+    height: 45vh;
+    min-height: 350px;
+    border: 1px solid #E6EAE8;
+    margin-top: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Div Interno Técnico donde Leaflet renderiza */
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Tarjeta Flotante sobre el Mapa */
+.map-overlay-card {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    z-index: 2;
+    max-width: 260px;
+    border-left: 3px solid var(--verde-pastel);
+}
+
+.map-overlay-card h5 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: var(--negro-texto);
+}
+
+.map-overlay-card p {
+    font-size: 0.85rem;
+    color: var(--gris-subtil);
+    margin-bottom: 12px;
+}
+
+/* Botón de Direcciones del Mapa */
+.btn-mapa-ruta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--negro-solido);
+    color: #FFFFFF !important;
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mapa-ruta:hover {
+    background-color: var(--verde-pastel);
+}
+
+/* Optimización para Pantallas Pequeñas en el Mapa */
+@media (max-width: 576px) {
+    .map-overlay-card {
+        top: auto;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        max-width: none;
+        padding: 12px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .map-overlay-card p { margin-bottom: 0; display: none; }
+    .map-overlay-card h5 { margin-bottom: 0; font-size: 0.9rem; }
+    .btn-mapa-ruta { padding: 6px 12px; font-size: 0.7rem; }
+}
+
+/* Botones Flotantes de la App */
+.float-wa {
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    bottom: 25px;
+    right: 25px; 
+    background-color: var(--verde-pastel);
+    color: #FFFFFF !important;
+    border-radius: 50%;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+    border: 2px solid var(--verde-pastel); 
+    text-decoration: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.float-wa i {
+    font-size: 1.2rem; 
+    line-height: 1;
+}
+
+@media (hover: hover) {
+    .float-wa:hover { 
+        background-color: #FFFFFF; 
+        color: var(--verde-pastel) !important; 
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.scroll-to-top {
+    position: fixed;
+    width: 48px; 
+    height: 48px; 
+    bottom: 88px; 
+    right: 25px;  
+    background-color: var(--verde-pastel);
+    color: #FFFFFF !important;
+    border-radius: 50%;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+    border: 2px solid var(--verde-pastel); 
+    text-decoration: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.scroll-to-top i {
+    font-size: 1.2rem; 
+    line-height: 1;
+}
+
+@media (hover: hover) {
+    .scroll-to-top:hover { 
+        background-color: #FFFFFF; 
+        color: var(--verde-pastel) !important; 
+    }
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Corrección absoluta de visibilidad para marcadores personalizados */
+.custom-leaflet-pin {
+    background: transparent !important;
+    border: none !important;
+    overflow: visible !important;
+}
+
+/* Pie de Página (Footer) */
+footer {
+    background-color: var(--negro-solido);
+    padding: 2.2rem 1.5rem;
+    color: #858A88;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
+    border-top: 1px solid #1E201F;
+    width: 100%;
+    box-sizing: border-box;
+}
