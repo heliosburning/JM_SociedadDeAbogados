@@ -1,1 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurídico Michoacán | Sociedad de Abogados</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <link rel="stylesheet" href="estilos_3.css">
+</head>
+
+<body>    
+    <div class="info-bar">
+        <div>
+            <span class="d-none d-md-inline"><i class="bi bi-envelope-fill" style="color: var(--verde-pastel); margin-right: 5px;"></i> juridicomichoacan25@gmail.com</span>
+        </div>
+        <div class="social-icons d-flex align-items-center">
+            <a href="https://www.facebook.com/share/1ZdvzVwzoy/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.threads.net/@juridico_michoacan" target="_blank"><i class="fa-brands fa-threads"></i></a>
+            <a href="https://www.instagram.com/juridico_michoacan?igsh=MWlwdGR0MGJmODBnMQ=="><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold d-flex flex-column" href="#" style="line-height: 1.2;">
+                <div>
+                    <span style="color: #FFFFFF;" id="nav-brand-main">JURÍDICO</span> 
+                    <span id="nav-brand-sub" style="color: var(--verde-pastel); font-weight: 300;">MICHOACÁN</span>
+                </div>
+                <small id="nav-brand-tag" class="text-uppercase tracking-wide" style="color: var(--dorado-pastel); font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; margin-top: 2px;">
+                    Sociedad de Abogados
+                </small>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item active"><a class="nav-link" href="#inicio" id="nav-inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#nosotros" id="nav-nosotros">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#servicios" id="nav-servicios">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto-ubicacion" id="nav-contacto">Contacto</a></li>
+                    
+                    <li class="nav-item mt-2 mt-lg-0">
+                        <select class="lang-select" id="languageSelector" title="Seleccionar Idioma" onchange="changeLanguage(this.value)">
+                            <option value="es">ESPAÑOL</option>
+                            <option value="en">ENGLISH</option>
+                            <option value="pua">PURHÉPECHA</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="container text-center">
+            <h1 class="font-weight-bold mb-3" id="hero-title">Defendemos Sus Derechos</h1>
+            <p class="mb-4" id="hero-desc">
+                Experiencia, confidencialidad y compromiso legal a su servicio. Brindamos soluciones estratégicas con un lenguaje claro y transparente.
+            </p>
+            <a href="#contacto-ubicacion" class="btn btn-interactivo" id="hero-btn">Agendar Asesoría</a>
+        </div>
+    </header>
+
+    <section id="nosotros" class="secciones">
+        <div class="container">
+            <h2 class="titulo-secciones" id="about-title">
+                <i class="bi bi-bank" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>Quiénes Somos
+            </h2>
+            <hr class="linea-decorativa">
+            
+            <div class="row text-top-alignment">
+                <div class="col-lg-4 mb-4 mb-lg-0 text-center text-lg-left pr-lg-4 d-flex flex-column justify-content-start">
+                    <h3 class="h4 font-weight-bold mb-3" style="color: var(--verde-pastel);" id="about-sub-firm">Nuestra Firma</h3>
+                    <p class="text-muted" style="line-height: 1.7; font-size: 0.95rem; text-align: justify;" id="about-text">
+                        Tenemos el objetivo de construir relaciones sólidas y de confianza con nuestros clientes, guiándolos con claridad y empatía, para que tomen decisiones seguras y puedan crecer sin preocupaciones legales.
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0 d-flex">
+                    <div class="p-4 w-100" style="background-color: var(--gris-pastel-claro); border-top: 3px solid var(--dorado-pastel); border-radius: 4px;">
+                        <h3 class="h5 font-weight-bold mb-3" style="color: var(--negro-texto);" id="about-mision-title">Misión</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.7; text-align: justify;" id="about-mision-desc">
+                            Acompañar a cada cliente en sus retos legales con cercanía, confianza y profesionalismo, ofreciendo soluciones claras y prácticas que le den tranquilidad y respaldo en cada paso de su process.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex">
+                    <div class="p-4 w-100" style="background-color: var(--gris-pastel-claro); border-top: 3px solid var(--verde-pastel); border-radius: 4px;">
+                        <h3 class="h5 font-weight-bold mb-3" style="color: var(--negro-texto);" id="about-vision-title">Visión</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.7; text-align: justify;" id="about-vision-desc">
+                            Ser un despacho jurídico reconocido no sólo por nuestra experiencia, sino por la confianza y la seguridad que brindamos a las personas y empresas que nos eligen, convirtiéndonos en un aliado confiable para proteger y fortalecer sus proyectos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="bloque-valores">
+                        <h4 class="h6 text-center text-uppercase font-weight-bold mb-4" style="letter-spacing: 1px; color: var(--gris-subtil);" id="values-main-title">Pilares Éticos Fundamentales</h4>
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3 mb-md-0 valor-item">
+                                <h5 class="font-weight-bold mb-2" id="val1-title">Honestidad</h5>
+                                <p class="small text-muted mb-0" id="val1-desc">Transparencia absoluta en la viabilidad real de su caso.</p>
+                            </div>
+                            <div class="col-md-3 mb-3 mb-md-0 valor-item">
+                                <h5 class="font-weight-bold mb-2" id="val2-title">Confidencialidad</h5>
+                                <p class="small text-muted mb-0" id="val2-desc">Resguardo estricto y secreto profesional de su información.</p>
+                            </div>
+                            <div class="col-md-3 mb-3 mb-md-0 valor-item">
+                                <h5 class="font-weight-bold mb-2" id="val3-title">Lealtad</h5>
+                                <p class="small text-muted mb-0" id="val3-desc">Compromiso incondicional con la defensa de sus intereses.</p>
+                            </div>
+                            <div class="col-md-3 valor-item">
+                                <h5 class="font-weight-bold mb-2" id="val4-title">Excelencia</h5>
+                                <p class="small text-muted mb-0" id="val4-desc">Preparación e innovación técnica jurídica rigurosa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="secciones secciones-alternas">
+        <div class="container">
+            <h2 class="titulo-secciones" id="services-title">
+                <i class="bi bi-briefcase" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>Nuestros Servicios
+            </h2>
+            <hr class="linea-decorativa">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-file-earmark-text"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv1-title">Derecho Civil</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv1-desc">Asesoría clara en contratos, propiedades, herencias (sucesiones), arrendamientos y la resolución judicial o pacífica de conflictos particulares.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-people-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv2-title">Derecho Familiar</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv2-desc">Especialistas empáticos en procesos de divorcio, pensiones alimenticias, guarda y custodia de menores, así como trámites de adopción.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-briefcase-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv3-title">Derecho Laboral</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv3-desc">Defensa integral de los derechos de los trabajadores y consultoría empresarial preventiva para evitar riesgos o demandas corporativas.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-shield-lock-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv4-title">Derecho Penal</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv4-desc">Defensa técnica especializada y representación estratégica en el sistema penal acusatorio, resguardando su libertad y presunción de inocencia.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-building-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv5-title">Derecho Corporativo</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv5-desc">Constitución de sociedades, auditorías legales, propiedad intelectual y estructuras normativas sólidas para el desarrollo empresarial estable.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-bank2"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv6-title">Juicios de Amparo</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv6-desc">Protección de última instancia contra actos u omisiones de autoridades gubernamentales que vulneren sus derechos constitucionales fundamentales.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-tree-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv7-title">Derecho Agrario</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv7-desc">Asesoría jurídica especializada en conflictos ejidales, regularización de tierras comunales, sucesiones agrarias y contratos de usufructo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-cash-coin"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv8-title">Derecho Fiscal</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv8-desc">Defensa frente a auditorías fiscales del SAT, acuerdos conclusivos ante PRODECON, medios de defensa y planeación tributaria legal.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.7rem; color: var(--verde-pastel);"><i class="bi bi-cart-check-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold" id="srv9-title">Derecho Mercantil</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.5;" id="srv9-desc">Cobranza judicial de pagarés, cheques y títulos de crédito. Litigio contractual comercial y solución de controversias societarias.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto-ubicacion" class="secciones">
+        <div class="container">
+            <h2 class="titulo-secciones" id="contact-title">
+                <i class="bi bi-geo-alt" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>Contacto y Ubicación
+            </h2>
+            <hr class="linea-decorativa">
+            
+            <div class="row align-items-stretch">
+                <div class="col-md-6 mb-4 mb-md-0 d-flex flex-column justify-content-start">
+                    <h3 class="h4 mb-4 font-weight-bold" style="color: var(--verde-pastel);" id="contact-subtitle">Estamos listos para ayudarle</h3>
+                    <p class="mb-3" style="font-size: 0.95rem;"><strong id="c-dir">📍 Dirección:</strong> Calle Juan Crisostomo Bonilla #223 Interior 2 C.P. 58147. Colonia Defensores de Puebla, Municipio de Morelia, Mich.</p>
+                    <p class="mb-3" style="font-size: 0.95rem;"><strong id="c-tel">📞 Teléfono:</strong> +52 1 234 567 8900</p>
+                    <p class="mb-3" style="font-size: 0.95rem;"><strong>✉️ Correo:</strong> juridicomichoacan25@gmail.com</p>
+                    <p class="mb-0" style="font-size: 0.95rem;"><strong id="c-hor">⏰ Horario:</strong> <span id="c-hor-val">Lunes a Viernes: 9:00 AM - 6:00 PM | Sábados: 10:00 AM - 2:00 PM</span></p>
+                </div>
+                <div class="col-md-6 d-flex align-items-start">
+                    <div class="p-4 w-100" style="background-color: var(--gris-pastel-claro); border-left: 4px solid var(--verde-pastel); border-radius: 4px;">
+                        <h3 class="h5 mb-3 font-weight-bold" style="color: var(--verde-pastel);" id="contact-box-title">Atención Inmediata</h3>
+                        <p class="text-muted small mb-0" style="line-height: 1.65; font-size: 0.88rem;" id="contact-box-desc">
+                            Sabemos que los problemas legales pueden ser complejos. Si prefiere una comunicación más ágil y directa, presione el botón flotante de <a href="https://wa.me/521234567890?text=Hola,%20me%20gustaría%20agendar%20una%20asesoría%20legal." target="_blank" rel="noopener noreferrer" class="link-texto-wa">WhatsApp</a> en la esquina inferior derecha. Un especialista le atenderá de inmediato para agendar su cita.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor_elementos">
+                <div id="map"></div>
+                <div class="map-overlay-card">
+                    <h5>Nuestra Oficina</h5>
+                    <p>Morelia, Michoacán</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=19.711632,-101.235660" target="_blank" rel="noopener noreferrer" class="btn-mapa-ruta">
+                        <i class="fas fa-route"></i> Cómo llegar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-md-left">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-2 mb-md-0">
+                    <p class="mb-0" id="foot-copy">© 2026 Jurídico Michoacán. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-right text-center" style="font-size: 0.78rem;">
+                    <p class="mb-0 text-muted" id="foot-law">Consulte nuestro Aviso de Privacidad | Rigiéndonos bajo las leyes de Michoacán, México.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" id="btnScrollTop" title="Volver Arriba">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <a href="https://wa.me/521234567890?text=Hola,%20me%20gustaría%20agendar%20una%20asesoría%20legal." class="float-wa" target="_blank" rel="noopener noreferrer" title="Chat de WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <script>
+        /* ==========================================================================
+        LÓGICA GLOBAL: MAPA INTERACTIVO, AUTOMATIZACIONES Y TRADUCTOR DINÁMICO
+        ========================================================================== */
+
+        /* Inicialización del Mapa Tecnológico Minimalista Corregido */
+        document.addEventListener("DOMContentLoaded", function() {
+            // Coordenadas exactas (Calle Juan Crisóstomo Bonilla, Morelia)
+            const lat = 19.711632;
+            const lng = -101.235660;
+            
+            // Crea el mapa centrado en la oficina
+            const map = L.map('map', {
+                center: [lat, lng],
+                zoom: 17, // Subimos a 17 para una visualización más cercana y fácil de ubicar
+                zoomControl: false,
+                scrollWheelZoom: false 
+            });
+
+            // Capa de diseño minimalista de CartoDB
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap © CARTO',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            // NUEVO MARCADOR ROBUSTO: Un círculo verde pastel con un pin blanco adentro.
+            // Evita usar rotaciones CSS que rompen el posicionamiento de Leaflet.
+            const markerHtml = `
+                <div style="
+                    background-color: #87A99C; 
+                    width: 40px; 
+                    height: 40px; 
+                    border-radius: 50%; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    border: 3px solid #FFFFFF; 
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+                ">
+                    <i class="fas fa-map-marker-alt" style="color: #FFFFFF; font-size: 18px;"></i>
+                </div>
+            `;
+            
+            const iconMarker = L.divIcon({
+                className: "custom-leaflet-pin",
+                iconSize: [40, 40],
+                iconAnchor: [20, 20], // Centrado exacto sobre la coordenada
+                html: markerHtml
+            });
+
+            // Añadir marcador principal al mapa
+            L.marker([lat, lng], { icon: iconMarker }).addTo(map);
+            
+            // Control de Zoom inferior derecho
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            // Corrección crítica de renderizado en Leaflet
+            setTimeout(function() {
+                map.invalidateSize();
+                map.setView([lat, lng], 17);
+            }, 400);
+        });
+
+        /* Control de redirección a Google Maps (Ver Ubicación Directa, No Ruta) */
+        $(document).ready(function() {
+            // Escucha el clic en el botón 'Cómo llegar' o de ubicación
+            $(document).on('click', '.btn-mapa-ruta', function(e) {
+                e.preventDefault();
+                // URL configurada para centrar el mapa en el lugar exacto con un pin en Google Maps
+                const googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=19.711632,-101.235660";
+                window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
+            });
+        });
+
+        /* Colapso automático del menú móvil al seleccionar enlaces o pulsar fuera de él */
+        $(document).ready(function () {
+            $('.navbar-nav a:not(.dropdown-toggle)').click(function() {
+                $('.navbar-collapse').collapse('hide');
+            });
+
+            $(document).click(function (event) {
+                var clickover = $(event.target);
+                var _opened = $(".navbar-collapse").hasClass("show");
+                if (_opened === true && !clickover.closest('.navbar').length) {
+                    $(".navbar-collapse").collapse('hide');
+                }
+            });
+        });
+
+        /* Control de scroll para activación del botón superior */
+        window.addEventListener('scroll', function() {
+            var btnUp = document.getElementById('btnScrollTop');
+            if (btnUp) {
+                if (window.scrollY > 300) {
+                    btnUp.classList.add('show');
+                } else {
+                    btnUp.classList.remove('show');
+                }
+            }
+        });
+
+        /* Banco de Datos Multilingüe */
+        const translations = {
+            es: {
+                brandMain: "JURÍDICO", brandSub: "MICHOACÁN", brandTag: "Sociedad de Abogados",
+                navInicio: "Inicio", navNosotros: "Nosotros", navServicios: "Servicios", navContacto: "Contacto",
+                heroTitle: "Defendemos Sus Derechos", heroDesc: "Experiencia, confidencialidad y compromiso legal a su servicio. Brindamos soluciones estratégicas con un lenguaje claro y transparente.", heroBtn: "Agendar Asesoría",
+                aboutTitle: "Quiénes Somos", aboutSubFirm: "Nuestra Firma", aboutText: "Somos un despacho jurídico comprometido con la excelencia y la justicia. Nuestro equipo de profesionales cuenta con una sólida trayectoria ofreciendo asesoría legal personalizada tanto a personas físicas como morales, rigiéndonos bajo los más altos estándares éticos de confidencialidad y honestidad.",
+                aboutMisionTitle: "Misión", aboutMisionDesc: "Proteger la seguridad jurídica de nuestros representados a través de estrategias legales innovadoras y preventivas, garantizar un servicio transparente, empático y de alta calidad técnica que resuelva de raíz sus problemáticas.",
+                aboutVisionTitle: "Visión", aboutVisionDesc: "Consolidarnos como el despacho jurídico líder de la región, distinguidos por nuestra integridad institucional, la actualización legal constante y por ser la opción más confiable para la defense patrimonial y corporativa.",
+                valuesMainTitle: "Pilares Éticos Fundamentales", val1Title: "Honestidad", val1Desc: "Transparencia absoluta en la viabilidad real de su caso.", val2Title: "Confidencialidad", val2Desc: "Resguardo estricto y secreto profesional de su información.", val3Title: "Lealtad", val3Desc: "Compromiso incondicional con la defensa de sus intereses.", val4Title: "Excelencia", val4Desc: "Preparación e innovación técnica jurídica rigurosa.",
+                servicesTitle: "Nuestros Servicios",
+                srv1Title: "Derecho Civil", srv1Desc: "Asesoría clara en contratos, propiedades, herencias (sucesiones), arrendamientos y la resolución judicial o pacífica de conflictos particulares.",
+                srv2Title: "Derecho Familiar", srv2Desc: "Especialistas empáticos en procesos de divorcio, pensiones alimenticias, guarda y custodia de menores, así como trámites de adopción.",
+                srv3Title: "Derecho Laboral", srv3Desc: "Defensa integral de los derechos de los trabajadores y consultoría empresarial preventiva para evitar riesgos o demandas corporativas.",
+                srv4Title: "Derecho Penal", srv4Desc: "Defensa técnica especializada y representación estratégica en el sistema penal acusatorio, resguardando su libertad y presunción de inocencia.",
+                srv5Title: "Derecho Corporativo", srv5Desc: "Constitución de sociedades, auditorías legales, propiedad intelectual y estructuras normativas sólidas para el desarrollo empresarial estable.",
+                srv6Title: "Juicios de Amparo", srv6Desc: "Protección de última instancia contra actos u omisiones de autoridades gubernamentales que vulneren sus derechos constitucionales fundamentales.",
+                srv7Title: "Derecho Agrario", srv7Desc: "Asesoría jurídica especializada en conflictos ejidales, regularización de tierras comunales, sucesiones agrarias y contratos de usufructo.",
+                srv8Title: "Derecho Fiscal", srv8Desc: "Defensa frente a auditorías fiscales del SAT, acuerdos conclusivos ante PRODECON, medios de defensa y planeación tributaria legal.",
+                srv9Title: "Derecho Mercantil", srv9Desc: "Cobranza judicial de pagarés, cheques y títulos de crédito. Litigio contractual comercial y solución de controversias societarias.",
+                contactTitle: "Contacto y Ubicación", contactSubtitle: "Estamos listos para ayudarle",
+                cDir: "📍 Dirección:", cTel: "📞 Teléfono:", cHor: "⏰ Horario:", cHorVal: "Lunes a Viernes: 9:00 AM - 6:00 PM | Sábados: 10:00 AM - 2:00 PM",
+                contactBoxTitle: "Atención Inmediata", contactBoxDesc: "Sabemos que los problemas legales pueden ser complejos. Si prefiere una comunicación más ágil y directa, presione el botón flotante de <a href='https://wa.me/521234567890?text=Hola,%20me%20gustaría%20agendar%20una%20asesoría%20legal.' target='_blank' rel='noopener noreferrer' class='link-texto-wa'>WhatsApp</a> en la esquina inferior derecha. Un especialista le atenderá de inmediato para agendar su cita.",
+                footCopy: "© 2026 Jurídico Michoacán. Todos los derechos reservados.",
+                footLaw: "Consulte nuestro Aviso de Privacidad | Rigiéndonos bajo las leyes de Michoacán, México."
+            },
+            en: {
+                brandMain: "MICHOACÁN", brandSub: "LAW FIRM", brandTag: "Law Firm",
+                navInicio: "Home", navNosotros: "About Us", navServicios: "Services", navContacto: "Contact",
+                heroTitle: "We Defend Your Rights", heroDesc: "Experience, confidentiality, and legal commitment at your service. We provide strategic solutions using clear and transparent language.", heroBtn: "Schedule Consultation",
+                aboutTitle: "About Us", aboutSubFirm: "Our Firm", aboutText: "We are a law firm committed to excellence and justice. Our team of professionals has a solid track record offering personalized legal counsel to both individuals and corporations, guided by the highest ethical standards of confidentiality and honesty.",
+                aboutMisionTitle: "Mission", aboutMisionDesc: "To protect the legal security of our clients through innovative and preventive legal strategies, ensuring a transparent, empathetic, and high-quality technical service that thoroughly resolves their problems.",
+                aboutVisionTitle: "Vision", aboutVisionDesc: "To establish ourselves as the leading law firm in the region, distinguished by our institutional integrity, constant legal updates, and being the most reliable choice for asset and corporate defense.",
+                valuesMainTitle: "Core Ethical Pillars", val1Title: "Honesty", val1Desc: "Absolute transparency on the true viability of your case.", val2Title: "Confidentiality", val2Desc: "Strict safeguarding and professional secrecy of your data.", val3Title: "Loyalty", val3Desc: "Unconditional commitment to defending your best interests.", val4Title: "Excelence", val4Desc: "Rigorous legal preparation and technical innovation.",
+                servicesTitle: "Our Services",
+                srv1Title: "Civil Law", srv1Desc: "Clear advice on contracts, properties, inheritances (successions), leases, and the judicial or peaceful resolution of private disputes.",
+                srv2Title: "Family Law", srv2Desc: "Empathetic specialists in divorce proceedings, alimony, child custody, as well as adoption procedures.",
+                srv3Title: "Labor Law", srv3Desc: "Comprehensive defense of workers' rights and preventive corporate consulting to avoid operational legal risks or corporate lawsuits.",
+                srv4Title: "Criminal Law", srv4Desc: "Specialized technical defense and strategic representation in the adversarial criminal justice system, safeguarding your liberty and presumption of innocence.",
+                srv5Title: "Corporate Law", srv5Desc: "Incorporation of companies, legal audits, intellectual property, and robust compliance frameworks for stable business growth.",
+                srv6Title: "Amparo Lawsuits", srv6Desc: "Last-resort constitutional protection against acts or omissions by government authorities that infringe upon your fundamental constitutional rights.",
+                srv7Title: "Agrarian Law", srv7Desc: "Specialized legal counsel on ejido disputes, communal land regularization, land inheritance, and usufruct contracts.",
+                srv8Title: "Tax Law", srv8Desc: "Defense against SAT tax audits, conclusive agreements before PRODECON, legal defense remedies, and tax planning.",
+                srv9Title: "Commercial Law", srv9Desc: "Judicial collection of promissory notes, checks, and credit titles. Commercial contract litigation and corporate dispute resolution.",
+                contactTitle: "Contact & Location", contactSubtitle: "We are ready to help you",
+                cDir: "📍 Address:", cTel: "📞 Phone:", cHor: "⏰ Hours:", cHorVal: "Monday to Friday: 9:00 AM - 6:00 PM | Saturdays: 10:00 AM - 2:00 PM",
+                contactBoxTitle: "Immediate Assistance", contactBoxDesc: "We know legal issues can be complex. If you prefer faster and more direct communication, press the floating <a href='https://wa.me/521234567890?text=Hola,%20me%20gustaría%20agendar%20una%20asesoría%20legal.' target='_blank' rel='noopener noreferrer' class='link-texto-wa'>WhatsApp</a> button in the lower right corner. A specialist will assist you immediately to schedule your appointment.",
+                footCopy: "© 2026 Jurídico Michoacán. All rights reserved.",
+                footLaw: "Review our Privacy Policy | Governed under the laws of Michoacán, Mexico."
+            },
+            pua: {
+                brandMain: "JURÍDICO", brandSub: "MICHUAKANI", brandTag: "Majuchekunha Karhanchiri",
+                navInicio: "Uárhini", navNosotros: "Jucha", navServicios: "Anhatapu", navContacto: "Uandani",
+                heroTitle: "Jucha Kuajpikuasïche Chari Kuarhengorhuani", heroDesc: "Ekuatsïperakua juchari k'uanhatsekuarhu. Jucha intsïspekuasïche ambakiti uandakua jimbó t'u uandantskuani sïmarhu.", heroBtn: "Uandantskueri P'orhemperakua",
+                aboutTitle: "Nena Juchá Esku", aboutSubFirm: "Juchari Anchiku", aboutText: "Juchá k'uájperakua uaxastakatirhesï ambakiti sesikua jimbó. Juchari uandari jorhenkuatisï sesi uandaxatisï iámarhu k'uiripuni nena sesikua echerhi jimbó p'orhemperakua jimbó k'uanhatsekuarhu uandakua.",
+                aboutMisionTitle: "Misión Pua", aboutMisionDesc: "Kuajpikuasïche chari kuarhengorhuani echerhi jimbó k'uanhatsekuarhu uandakua urhupeni tsï uaxastakua tachani jimbó ambakiti uandakua.",
+                aboutVisionTitle: "Visión Pua", aboutVisionDesc: "Uaxastakua echerhi jimbó tsï k'uájperakua uaxastakua líderrhu k'uiripuni iámarhu sesikua juramukua p'orhemperakua urhupeni.",
+                valuesMainTitle: "Pilares Éticos Pua", val1Title: "Honestidad Pua", val1Desc: "Transparencia uaxastakua chkuandani juramukua jimbó.", val2Title: "Secreto Pua", val2Desc: "Resguardo estricto chkuandani uandari p'orhemperakua.", val3Title: "Lealtad Pua", val3Desc: "Compromiso incondicional chari kuajpikuasïche jimbó.", val4Title: "Excelencia Pua", val4Desc: "Preparación k'uájperakua uaxastakatirhesï ambakiti.",
+                servicesTitle: "Juchari Anchikuajperakua",
+                srv1Title: "Civil Marhuatsperakua", srv1Desc: "Ambakiti kuajperakua uaxastakua karharakua jimbó, k'uanhatsekuarhu uandakua p'orhemperakua echerhi jimbó.",
+                srv2Title: "Tshiperi Marhuatsperakua", srv2Desc: "Uandari t'shiperi t'u k'uájperakua kuajpikuasïche k'uiripuni, uatsïsï marhuatspekua p'orhemperakua jimbó.",
+                srv3Title: "Anchikuatiri Marhuatsperakua", srv3Desc: "Kuajperakua iámarhu anchikuatiri sesikua t'u tachani uaxastakua juramukua jimbó unia no no sesi chkuandani.",
+                srv4Title: "Penal Marhuatsperakua", srv4Desc: "Kuajpikuasïche k'uiripuni nena uaxastakua tsï t'shiperi chkuandani juramukua jimbó tsï juchari uandantskuarhu uandari.",
+                srv5Title: "Corporativo Marhuatsperakua", srv5Desc: "Uaxastakua tachani korporativos tsï uniarhu p'orhemperakua echerhi jimbó karharakua uandakua urhupeni.",
+                srv6Title: "Amparo Juicios", srv6Desc: "Kuajpikuasïche iámarhu autoridadi tachani uaxastakua jimbó t'u uekani unia no no sesi chari derechos constitutionals.",
+                srv7Title: "Agrario Marhuatsperakua", srv7Desc: "Asesoría ejidal uaxastakua echerhi jimbó, regularización de tierras comunales t'u sucesiones agrarias.",
+                srv8Title: "Fiscal Marhuatsperakua", srv8Desc: "Defensa SAT jimbó, acuerdos conclusivos PRODECON, medios de defense tributaria legal.",
+                srv9Title: "Mercantil Marhuatsperakua", srv9Desc: "Cobranza judicial de pagarés, cheques t'u títulos de crédito litigio contractual comercial.",
+                contactTitle: "Uandani t'u Mituakua", contactSubtitle: "Juchá k'uájperakuache chari",
+                cDir: "📍 Jukanarhikua:", cTel: "📞 Uandajperakua:", cHor: "⏰ Jurhiatakuasï:", cHorVal: "Lunes t'u Viernes jimbó: 9:00 AM - 6:00 PM | Sábadu jimbó: 10:00 AM - 2:00 PM",
+                contactBoxTitle: "Iasï Uniarhu", contactBoxDesc: "Sesi uandantskua jimbó. T'u uekani p'orhempeni jucha jimbó, eratse uandajperakua <a href='https://wa.me/521234567890?text=Hola,%20me%20gustaría%20agendar%20una%20asesoría%20legal.' target='_blank' rel='noopener noreferrer' class='link-texto-wa'>WhatsApp</a> jimbó k'uanhatsekuarhu t'u iasï uandani.",
+                footCopy: "© 2026 Jurídico Michoacán. Yamendu sesikua kuajpatia.",
+                footLaw: "Aviso de Privacidad jimbó | Juramukua Michuakanirhu, México."
+            }
+        };
+
+        /* Lógica Inyectora de Idioma Dinámico */
+        function changeLanguage(lang) {
+            if(!translations[lang]) return;
+            const t = translations[lang];
+            
+            document.getElementById('nav-brand-main').innerText = t.brandMain;
+            document.getElementById('nav-brand-sub').innerText = t.brandSub;
+            document.getElementById('nav-brand-tag').innerText = t.brandTag;
+            document.getElementById('nav-inicio').innerText = t.navInicio;
+            document.getElementById('nav-nosotros').innerText = t.navNosotros;
+            document.getElementById('nav-servicios').innerText = t.navServicios;
+            document.getElementById('nav-contacto').innerText = t.navContacto;
+            
+            document.getElementById('hero-title').innerText = t.heroTitle;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('hero-btn').innerText = t.heroBtn;
+            
+            document.getElementById('about-title').innerHTML = `<i class="bi bi-bank" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>${t.aboutTitle}`;
+            document.getElementById('about-sub-firm').innerText = t.aboutSubFirm;
+            document.getElementById('about-text').innerText = t.aboutText;
+            document.getElementById('about-mision-title').innerText = t.aboutMisionTitle;
+            document.getElementById('about-mision-desc').innerText = t.aboutMisionDesc;
+            document.getElementById('about-vision-title').innerText = t.aboutVisionTitle;
+            document.getElementById('about-vision-desc').innerText = t.aboutVisionDesc;
+            
+            document.getElementById('values-main-title').innerText = t.valuesMainTitle;
+            document.getElementById('val1-title').innerText = t.val1Title;
+            document.getElementById('val1-desc').innerText = t.val1Desc;
+            document.getElementById('val2-title').innerText = t.val2Title;
+            document.getElementById('val2-desc').innerText = t.val2Desc;
+            document.getElementById('val3-title').innerText = t.val3Title;
+            document.getElementById('val3-desc').innerText = t.val3Desc;
+            document.getElementById('val4-title').innerText = t.val4Title;
+            document.getElementById('val4-desc').innerText = t.val4Desc;
+            
+            document.getElementById('services-title').innerHTML = `<i class="bi bi-briefcase" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>${t.servicesTitle}`;
+            document.getElementById('srv1-title').innerText = t.srv1Title;
+            document.getElementById('srv1-desc').innerText = t.srv1Desc;
+            document.getElementById('srv2-title').innerText = t.srv2Title;
+            document.getElementById('srv2-desc').innerText = t.srv2Desc;
+            document.getElementById('srv3-title').innerText = t.srv3Title;
+            document.getElementById('srv3-desc').innerText = t.srv3Desc;
+            document.getElementById('srv4-title').innerText = t.srv4Title;
+            document.getElementById('srv4-desc').innerText = t.srv4Desc;
+            document.getElementById('srv5-title').innerText = t.srv5Title;
+            document.getElementById('srv5-desc').innerText = t.srv5Desc;
+            document.getElementById('srv6-title').innerText = t.srv6Title;
+            document.getElementById('srv6-desc').innerText = t.srv6Desc;
+            document.getElementById('srv7-title').innerText = t.srv7Title;
+            document.getElementById('srv7-desc').innerText = t.srv7Desc;
+            document.getElementById('srv8-title').innerText = t.srv8Title;
+            document.getElementById('srv8-desc').innerText = t.srv8Desc;
+            document.getElementById('srv9-title').innerText = t.srv9Title;
+            document.getElementById('srv9-desc').innerText = t.srv9Desc;
+            
+            document.getElementById('contact-title').innerHTML = `<i class="bi bi-geo-alt" style="color: var(--verde-pastel); margin-right: 12px; font-size: 1.5rem; vertical-align: middle;"></i>${t.contactTitle}`;
+            document.getElementById('contact-subtitle').innerText = t.contactSubtitle;
+            document.getElementById('c-dir').innerHTML = "📍 " + t.cDir.replace("📍 ", "");
+            document.getElementById('c-tel').innerHTML = "📞 " + t.cTel.replace("📞 ", "");
+            document.getElementById('c-hor').innerHTML = "⏰ " + t.cHor.replace("⏰ ", "");
+            document.getElementById('c-hor-val').innerText = t.cHorVal;
+            document.getElementById('contact-box-title').innerText = t.contactBoxTitle;
+            document.getElementById('contact-box-desc').innerHTML = t.contactBoxDesc;
+            
+            document.getElementById('foot-copy').innerText = t.footCopy;
+            document.getElementById('foot-law').innerText = t.footLaw;
+
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                if (typeof $ !== 'undefined') {
+                    $('#navbarNav').collapse('hide');
+                } else {
+                    navbarCollapse.classList.remove('show');
+                    const toggler = document.querySelector('.navbar-toggler');
+                    if (toggler) {
+                        toggler.setAttribute('aria-expanded', 'false');
+                        toggler.classList.add('collapsed');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
