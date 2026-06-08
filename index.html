@@ -141,13 +141,23 @@
         /* Bloques de Contenido */
         .bloque-valores { background: #FFFFFF; border: 1px solid #E6EAE8; border-radius: 4px; padding: 30px 22px; margin-top: 20px; }
         
-        /* Cards de Servicios */
-        .card-custom { background-color: var(--blanco-fondo); border: 1px solid #E6EAE8; border-radius: 4px; padding: 22px 18px; transition: border-color 0.3s, box-shadow 0.3s; }
+        /* Cards de Servicios: Forzado de Altura Homogénea por Fila */
+        .card-custom { 
+            background-color: var(--blanco-fondo); 
+            border: 1px solid #E6EAE8; 
+            border-radius: 4px; 
+            padding: 22px 18px; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Forzar que tomen el alto máximo de su contenedor Bootstrap */
+        }
         .card-custom:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-color: var(--verde-pastel); }
 
-        /* Carrusel y Tarjetas del Equipo con Animación de Remarcado Oro */
+        /* Carrusel y Tarjetas del Equipo con Altura Homogénea */
         .section-subtitle { color: var(--verde-pastel); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 0.8rem; font-size: 0.8rem; }
         .swiper { width: 100%; padding: 15px 0 35px 0 !important; }
+        .swiper-slide { height: auto !important; display: flex; } /* Permite que las slides midan lo mismo */
         
         .pro-card { 
             background: var(--blanco-fondo); 
@@ -159,6 +169,7 @@
             width: 100%; 
             display: flex; 
             flex-direction: column; 
+            height: 100%; /* Ocupar el alto unificado por el carrusel */
         }
         .pro-card:hover { 
             border-color: var(--dorado-pastel);
@@ -185,12 +196,11 @@
             margin-top: 30px; 
             border-radius: 6px; 
             overflow: hidden; 
-            border: 3px solid var(--verde-pastel); /* Marco estilizado */
+            border: 3px solid var(--verde-pastel);
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
         #map { height: 340px; width: 100%; z-index: 1; }
         
-        /* Ajuste de la tarjeta flotante para armonizar con el nuevo marco */
         .map-overlay-card { 
             position: absolute; 
             top: 15px; 
@@ -232,7 +242,7 @@
             .bloque-valores { padding: 20px 15px; }
             .bloque-valores .col-md-3 { margin-bottom: 15px; }
             .bloque-valores .col-md-3:last-child { margin-bottom: 0; }
-            .contenedor_elementos { border-width: 2px; } /* Marco un poco más fino en móviles */
+            .contenedor_elementos { border-width: 2px; }
             .map-overlay-card { position: relative; top: 0; left: 0; width: 100%; border-radius: 0; border-left: 3px solid var(--verde-pastel); border-top: none; box-shadow: none; background: var(--blanco-fondo); }
             #map { height: 260px; }
             .float-wa { width: 44px; height: 44px; font-size: 1.4rem; bottom: 12px; right: 12px; }
@@ -276,7 +286,7 @@
                         <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#servicios">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contacto-ubicacion">Contacto</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
                             <select class="lang-select" id="languageSelector" title="Seleccionar Idioma">
@@ -317,7 +327,7 @@
                     <div class="p-3 w-100" style="background-color: var(--gris-pastel-claro); border-top: 3px solid var(--dorado-pastel); border-radius: 4px;">
                         <h3 class="h6 font-weight-bold mb-2" style="color: var(--negro-texto);">Misión</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.6; text-align: justify;">
-                            Acompañar a cada cliente en sus retos legales con cercanía, confianza y profesionalismo, ofreciendo soluciones claras y prácticas que le den tranquilidad y respaldo en cada paso de su proceso.
+                            Acompañar a cada cliente en sus retos legales con cercanía, confianza y profesionalismo, offering soluciones claras y prácticas que le den tranquilidad y respaldo en cada paso de su proceso.
                         </p>
                     </div>
                 </div>
@@ -463,65 +473,65 @@
         <div class="container">
             <h2 class="titulo-secciones"><i class="bi bi-briefcase" style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Nuestros Servicios</h2>
             <hr class="linea-decorativa">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100">
+            <div class="row match-height">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-file-earmark-text"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Civil</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Asesoría clara en contratos, propiedades, herencias (sucesiones), arrendamientos y la resolución judicial o pacífica de conflictos particulares.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-people-fill"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Familiar</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Especialistas empáticos en procesos de divorcio, pensiones alimenticias, guarda y custodia de menores, así como trámites de adopción.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-briefcase-fill"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Laboral</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Defensa integral de los derechos de los trabajadores y consultoría empresarial preventiva para evitar riesgos o demandas corporativas.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-shield-lock-fill"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Penal</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Defensa técnica especializada y representación estratégica en el sistema penal acusatorio, resguardando su libertad y presunción de inocencia.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-building-fill"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Corporativo</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Constitución de sociedades, auditorías legales, propiedad intelectual y estructuras normativas sólidas para el desarrollo empresarial estable.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-bank2"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Juicios de Amparo</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Protección de última instancia contra actos u omisiones de autoridades gubernamentales que vulneren sus derechos constitucionales fundamentales.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-tree-fill"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Agrario</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Asesoría jurídica especializada en conflictos ejidales, regularización de tierras comunales, sucesiones agrarias y contratos de usufructo.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card card-custom h-100">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-cash-coin"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Fiscal</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Defensa frente a auditorías fiscales del SAT, acuerdos conclusivos ante PRODECON, medios de defensa y planeación tributaria legal.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card card-custom h-100">
+                    <div class="card card-custom">
                         <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-cart-check-fill"></i></div>
                         <h3 class="h6 mb-2 font-weight-bold">Derecho Mercantil</h3>
                         <p class="small text-muted mb-0" style="line-height: 1.4;">Cobranza judicial de pagarés, cheques y títulos de crédito. Litigio contractual comercial y solución de controversias societarias.</p>
