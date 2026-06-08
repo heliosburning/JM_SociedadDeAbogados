@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jurídico Michoacán | Sociedad de Abogados</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <style>
+        /* Importación de la gama Artifakt Element */
+        @font-face {
+            font-family: 'Artifakt Element';
+            src: url('https://fonts.cdnfonts.com/s/92806/ArtifaktElementRegular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Artifakt Element';
+            src: url('https://fonts.cdnfonts.com/s/92806/ArtifaktElementBold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        :root {
+            --negro-solido: #111111;
+            --verde-pastel: #87A99C;         
+            --dorado-pastel: #DBC08D;         
+            --blanco-fondo: #FFFFFF;    
+            --gris-pastel-claro: #F5F7F6;   
+            --negro-texto: #222524;         
+            --gris-subtil: #707573;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: "Artifakt Element", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--blanco-fondo);
+            color: var(--negro-texto);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3, h4, h5, .titulo-secciones { font-weight: 700; letter-spacing: -0.3px; }
+
+        /* Contenedor de encabezado absoluto sobre el Hero */
+        .header-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+        }
+
+        /* Barra Superior Estática Traslúcida */
+        .info-bar {
+            background-color: rgba(17, 17, 17, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            color: #FFFFFF;
+            padding: 6px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .info-bar .social-icons a { color: #FFFFFF; margin-left: 12px; transition: color 0.3s; }
+        .info-bar .social-icons a:hover { color: var(--verde-pastel); }
+
+        /* Navbar Estática Traslúcida con la misma opacidad que el infobar */
+        .navbar { 
+            background-color: rgba(17, 17, 17, 0.4) !important; 
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            padding: 10px 15px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            padding: 8px 12px !important;
+            transition: color 0.2s ease;
+        }
+        
+        /* Resaltado del enlace activo (Scrollspy) y Hover */
+        .nav-link:hover, 
+        .navbar-nav .nav-item.active .nav-link,
+        .navbar-nav .nav-link.active { 
+            color: var(--verde-pastel) !important; 
+            font-weight: 700;
+        }
+
+        .lang-select {
+            background: transparent; color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 4px 8px; font-size: 0.72rem; border-radius: 3px; cursor: pointer; outline: none;
+        }
+        .lang-select option { background-color: var(--negro-solido); color: #FFFFFF; }
+
+        /* Hero completo: Ocupa el 100% de la pantalla e inicia desde el borde superior */
+        .hero {
+            background: linear-gradient(rgba(17, 17, 17, 0.65), rgba(17, 17, 17, 0.7)), url('jm_hero.png') no-repeat center center/cover;
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #FFFFFF;
+            padding: 110px 15px 0 15px; /* Margen interno para centrar el texto respetando los menús superiores */
+            box-sizing: border-box;
+        }
+        .hero h1 { font-size: clamp(1.6rem, 5vw, 2.8rem); line-height: 1.2; }
+        .hero p { font-size: clamp(0.85rem, 2vw, 1.05rem); max-width: 650px; color: rgba(255, 255, 255, 0.85); font-weight: 300; }
+
+        .btn-interactivo {
+            background-color: transparent; color: var(--dorado-pastel) !important; border: 1px solid var(--dorado-pastel);
+            padding: 10px 24px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-radius: 3px; transition: all 0.3s;
+        }
+        .btn-interactivo:hover { background-color: var(--dorado-pastel); color: var(--negro-solido) !important; }
+
+        /* Secciones y compensación de scroll para anclajes sin menús fijos */
+        .secciones { 
+            padding: 52px 0; 
+            background-color: var(--blanco-fondo); 
+            scroll-margin-top: 20px; /* Al ser el menú estático, la compensación de scroll es mínima */
+        }
+        .secciones-alternas { background-color: var(--gris-pastel-claro); }
+        .titulo-secciones { text-align: center; font-size: 1.5rem; color: var(--negro-solido); text-transform: uppercase; margin-bottom: 8px; }
+        .linea-decorativa { width: 45px; height: 3px; background-color: var(--dorado-pastel); border: none; margin: 0 auto 32px auto; }
+
+        /* Bloques de Contenido */
+        .bloque-valores { background: #FFFFFF; border: 1px solid #E6EAE8; border-radius: 4px; padding: 30px 22px; margin-top: 20px; }
+        
+        /* Cards de Servicios: Remarcado Verde sutil al pasar el mouse sin aumentar tamaño */
+        .card-custom { background-color: var(--blanco-fondo); border: 1px solid #E6EAE8; border-radius: 4px; padding: 22px 18px; transition: border-color 0.3s, box-shadow 0.3s; }
+        .card-custom:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-color: var(--verde-pastel); }
+
+        /* Carrusel y Tarjetas del Equipo con Animación de Remarcado Oro sin agrandar */
+        .section-subtitle { color: var(--verde-pastel); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 0.8rem; font-size: 0.8rem; }
+        .swiper { width: 100%; padding: 15px 0 35px 0 !important; }
+        
+        .pro-card { 
+            background: var(--blanco-fondo); 
+            border-radius: 6px; 
+            overflow: hidden; 
+            border: 1px solid #E6EAE8; 
+            border-bottom: 3px solid transparent; 
+            transition: border-color 0.3s, border-bottom-color 0.3s, box-shadow 0.3s; 
+            width: 100%; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        /* Hover modificado: Mismo comportamiento que servicios, pero con enfoque color Oro */
+        .pro-card:hover { 
+            border-color: var(--dorado-pastel);
+            border-bottom-color: var(--dorado-pastel);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+        
+        .pro-img-container { width: 100%; aspect-ratio: 1 / 1.05; overflow: hidden; background-color: var(--gris-pastel-claro); }
+        .pro-img-container img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+        .pro-info { padding: 1.2rem 1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .pro-name { font-size: 0.98rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--negro-texto); line-height: 1.25; }
+        .pro-specialty { color: var(--verde-pastel); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; }
+        .pro-socials a { color: var(--gris-subtil); font-size: 1rem; margin: 0 5px; transition: color 0.3s; }
+        .pro-socials a:hover { color: var(--dorado-pastel); }
+
+        .swiper-button-next, .swiper-button-prev { color: var(--verde-pastel) !important; background: #FFFFFF; width: 36px; height: 36px; border-radius: 50%; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .swiper-button-next:after, .swiper-button-prev:after { font-size: 0.8rem !important; font-weight: bold; }
+        .swiper-pagination-bullet-active { background: var(--verde-pastel) !important; }
+
+        /* Elementos del Mapa */
+        .contenedor_elementos { position: relative; margin-top: 30px; border-radius: 4px; overflow: hidden; }
+        #map { height: 340px; width: 100%; z-index: 1; }
+        .map-overlay-card { position: absolute; top: 15px; left: 15px; z-index: 10; background: rgba(255, 255, 255, 0.96); padding: 15px; border-radius: 4px; width: 220px; border-top: 3px solid var(--verde-pastel); }
+        .map-overlay-card h5 { font-size: 0.9rem; margin-bottom: 4px; font-weight: 700; }
+        .map-overlay-card p { font-size: 0.75rem; color: var(--gris-subtil); margin-bottom: 12px; }
+        .btn-mapa-ruta { background-color: var(--verde-pastel); color: #FFFFFF !important; font-size: 0.72rem; text-transform: uppercase; padding: 6px 12px; font-weight: 600; border-radius: 3px; display: block; text-align: center; text-decoration: none !important; }
+
+        /* Footer y Flotantes */
+        footer { background-color: var(--negro-solido); color: rgba(255, 255, 255, 0.6); padding: 22px 0; font-size: 0.8rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .scroll-to-top { position: fixed; width: 40px; height: 40px; bottom: 75px; right: 20px; background-color: var(--verde-pastel); color: #FFFFFF !important; border-radius: 50%; z-index: 100; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .scroll-to-top.show { opacity: 1; visibility: visible; }
+        
+        /* Botón flotante WhatsApp */
+        .float-wa { position: fixed; width: 48px; height: 48px; bottom: 15px; right: 18px; background-color: var(--verde-pastel); color: white !important; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 3px 10px rgba(0,0,0,0.2); z-index: 100; text-decoration: none !important; transition: transform 0.3s; }
+        .float-wa:hover { transform: scale(1.08); }
+
+        .wa-link-text { color: var(--verde-pastel); font-weight: 700; text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; }
+        .wa-link-text:hover, .wa-link-text:active { color: var(--dorado-pastel); text-decoration: underline; }
+        
+        #google_translate_element { display: none; }
+        .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+
+        /* Media Queries de Optimización específicas para pantallas móviles */
+        @media (max-width: 575.98px) {
+            .info-bar { padding: 4px 12px; font-size: 0.72rem; }
+            .navbar { padding: 8px 10px; }
+            .navbar-brand small { font-size: 0.58rem !important; }
+            .hero { padding-top: 95px; height: 100vh; }
+            .secciones { padding: 40px 0; scroll-margin-top: 20px; }
+            .titulo-secciones { font-size: 1.3rem; }
+            .bloque-valores { padding: 20px 15px; }
+            .bloque-valores .col-md-3 { margin-bottom: 15px; }
+            .bloque-valores .col-md-3:last-child { margin-bottom: 0; }
+            .map-overlay-card { position: relative; top: 0; left: 0; width: 100%; border-radius: 0; border-left: 3px solid var(--verde-pastel); border-top: none; box-shadow: none; background: var(--blanco-fondo); }
+            #map { height: 260px; }
+            .float-wa { width: 44px; height: 44px; font-size: 1.4rem; bottom: 12px; right: 12px; }
+            .scroll-to-top { width: 36px; height: 36px; bottom: 68px; right: 15px; }
+            .navbar-collapse { background: rgba(17, 17, 17, 0.95); padding: 15px; border-radius: 4px; margin-top: 8px; }
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="30">    
+    <div id="google_translate_element"></div>
+
+    <div class="header-container">
+        <div class="info-bar">
+            <div>
+                <span><i class="bi bi-envelope-fill" style="color: var(--verde-pastel); margin-right: 5px;"></i> juridicomichoacan25@gmail.com</span>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/1ZdvzVwzoy/"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.threads.net/@juridico_michoacan" target="_blank"><i class="fa-brands fa-threads"></i></a>
+                <a href="https://www.instagram.com/juridico_michoacan?igsh=MWlwdGR0MGJmODBnMQ=="><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold d-flex flex-column" href="#inicio" style="line-height: 1.2;">
+                    <div>
+                        <span style="color: #FFFFFF;">JURÍDICO</span> 
+                        <span style="color: var(--verde-pastel); font-weight: 300;">MICHOACÁN</span>
+                    </div>
+                    <small class="text-uppercase tracking-wide" style="color: var(--dorado-pastel); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; margin-top: 1px;">
+                        Sociedad de Abogados
+                    </small>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contacto-ubicacion">Contacto</a></li>
+                        <li class="nav-item mt-2 mt-lg-0">
+                            <select class="lang-select" id="languageSelector" title="Seleccionar Idioma">
+                                <option value="es">ESPAÑOL</option>
+                                <option value="en">ENGLISH</option>
+                                <option value="pua">PURHÉPECHA</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <header id="inicio" class="hero">
+        <div class="container text-center">
+            <h1 class="font-weight-bold mb-2">Defendemos Sus Derechos</h1>
+            <p class="mb-3 mx-auto">
+                Experiencia, confidencialidad y compromiso legal a su servicio. Brindamos soluciones estratégicas con un lenguaje claro y transparente.
+            </p>
+            <a href="#contacto-ubicacion" class="btn btn-interactivo">Agendar Asesoría</a>
+        </div>
+    </header>
+
+    <section id="nosotros" class="secciones">
+        <div class="container">
+            <h2 class="titulo-secciones"><i class="bi bi-bank" style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Quiénes Somos</h2>
+            <hr class="linea-decorativa">
+            
+            <div class="row text-top-alignment">
+                <div class="col-lg-4 mb-3 mb-lg-0 text-center text-lg-left pr-lg-3 d-flex flex-column justify-content-start">
+                    <h3 class="h5 font-weight-bold mb-2" style="color: var(--verde-pastel);">Nuestra Firma</h3>
+                    <p class="text-muted" style="line-height: 1.6; font-size: 0.9rem; text-align: justify;">
+                        Tenemos el objetivo de construir relaciones sólidas y de confianza con nuestros clientes, guiándolos con claridad y empatía, para que tomen decisiones seguras y puedan crecer sin preocupaciones legales.
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-3 mb-lg-0 d-flex">
+                    <div class="p-3 w-100" style="background-color: var(--gris-pastel-claro); border-top: 3px solid var(--dorado-pastel); border-radius: 4px;">
+                        <h3 class="h6 font-weight-bold mb-2" style="color: var(--negro-texto);">Misión</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.6; text-align: justify;">
+                            Acompañar a cada cliente en sus retos legales con cercanía, confianza y profesionalismo, ofreciendo soluciones claras y prácticas que le den tranquilidad y respaldo en cada paso de su proceso.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex">
+                    <div class="p-3 w-100" style="background-color: var(--gris-pastel-claro); border-top: 3px solid var(--verde-pastel); border-radius: 4px;">
+                        <h3 class="h6 font-weight-bold mb-2" style="color: var(--negro-texto);">Visión</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.6; text-align: justify;">
+                            Ser un despacho jurídico reconocido no sólo por nuestra experiencia, sino por la confianza y la seguridad que brindamos a las personas y empresas que nos eligen, convirtiéndonos en un aliado confiable para proteger y fortalecer sus proyectos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="bloque-valores">
+                        <h4 class="h6 text-center text-uppercase font-weight-bold mb-3" style="letter-spacing: 1px; color: var(--gris-subtil);">Pilares Éticos Fundamentales</h4>
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="h6 font-weight-bold mb-1">Honestidad</h5>
+                                <p class="small text-muted mb-0">Transparencia absoluta en la viabilidad real de su caso.</p>
+                            </div>
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="h6 font-weight-bold mb-1">Confidencialidad</h5>
+                                <p class="small text-muted mb-0">Resguardo estricto y secreto profesional de su información.</p>
+                            </div>
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h5 class="h6 font-weight-bold mb-1">Lealtad</h5>
+                                <p class="small text-muted mb-0">Compromiso incondicional con la defensa de sus intereses.</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="h6 font-weight-bold mb-1">Excelencia</h5>
+                                <p class="small text-muted mb-0">Preparación e innovación técnica jurídica rigurosa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="secciones secciones-alternas">
+        <div class="container text-center">
+            <h2 class="titulo-secciones"><i class="bi bi-people" style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Nuestros Especialistas</h2>
+            <p class="section-subtitle">Asesoría Legal Estratégica</p>
+            <hr class="linea-decorativa">
+            
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="pro-card">
+                            <div class="pro-img-container">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Dama de la Justicia - Jurídico Michoacán">
+                            </div>
+                            <div class="pro-info">
+                                <div>
+                                    <h3 class="pro-name">Lic. Jessica Paola Arvizu Arroyo</h3>
+                                    <p class="pro-specialty">Especialidad en Derecho Familiar</p>
+                                </div>
+                                <div class="pro-socials"><a href="#"><i class="bi bi-linkedin"></i></a><a href="#"><i class="bi bi-envelope-fill"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="pro-card">
+                            <div class="pro-img-container">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Dama de la Justicia - Jurídico Michoacán">
+                            </div>
+                            <div class="pro-info">
+                                <div>
+                                    <h3 class="pro-name">Mtro. Alejandro Medina Silva</h3>
+                                    <p class="pro-specialty">Especialidad en Derecho Penal</p>
+                                </div>
+                                <div class="pro-socials"><a href="#"><i class="bi bi-linkedin"></i></a><a href="#"><i class="bi bi-envelope-fill"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="pro-card">
+                            <div class="pro-img-container">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Dama de la Justicia - Jurídico Michoacán">
+                            </div>
+                            <div class="pro-info">
+                                <div>
+                                    <h3 class="pro-name">Lic. Claudia Ramos Esquivel</h3>
+                                    <p class="pro-specialty">Especialidad en Derecho Civil y Amparo</p>
+                                </div>
+                                <div class="pro-socials"><a href="#"><i class="bi bi-linkedin"></i></a><a href="#"><i class="bi bi-envelope-fill"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="pro-card">
+                            <div class="pro-img-container">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Dama de la Justicia - Jurídico Michoacán">
+                            </div>
+                            <div class="pro-info">
+                                <div>
+                                    <h3 class="pro-name">Mtro. Ricardo Ortiz Calderón</h3>
+                                    <p class="pro-specialty">Especialidad en Derecho Fiscal y Mercantil</p>
+                                </div>
+                                <div class="pro-socials"><a href="#"><i class="bi bi-linkedin"></i></a><a href="#"><i class="bi bi-envelope-fill"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="pro-card">
+                            <div class="pro-img-container">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Dama de la Justicia - Jurídico Michoacán">
+                            </div>
+                            <div class="pro-info">
+                                <div>
+                                    <h3 class="pro-name">Lic. Melissa Yazmin Trinidad Carranza</h3>
+                                    <p class="pro-specialty">Especialidad en Derecho Familiar</p>
+                                </div>
+                                <div class="pro-socials"><a href="#"><i class="bi bi-linkedin"></i></a><a href="#"><i class="bi bi-envelope-fill"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="pro-card">
+                            <div class="pro-img-container">
+                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Dama de la Justicia - Jurídico Michoacán">
+                            </div>
+                            <div class="pro-info">
+                                <div>
+                                    <h3 class="pro-name">Lic. Aide Calderón Silva</h3>
+                                    <p class="pro-specialty">Especialidad en Patrimonio</p>
+                                </div>
+                                <div class="pro-socials"><a href="#"><i class="bi bi-linkedin"></i></a><a href="#"><i class="bi bi-envelope-fill"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev d-none d-md-flex"></div>
+                <div class="swiper-button-next d-none d-md-flex"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="secciones">
+        <div class="container">
+            <h2 class="titulo-secciones"><i class="bi bi-briefcase" style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Nuestros Servicios</h2>
+            <hr class="linea-decorativa">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-file-earmark-text"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Civil</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Asesoría clara en contratos, propiedades, herencias (sucesiones), arrendamientos y la resolución judicial o pacífica de conflictos particulares.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-people-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Familiar</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Especialistas empáticos en procesos de divorcio, pensiones alimenticias, guarda y custodia de menores, así como trámites de adopción.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-briefcase-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Laboral</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Defensa integral de los derechos de los trabajadores y consultoría empresarial preventiva para evitar riesgos o demandas corporativas.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-shield-lock-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Penal</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Defensa técnica especializada y representación estratégica en el sistema penal acusatorio, resguardando su libertad y presunción de inocencia.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-building-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Corporativo</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Constitución de sociedades, auditorías legales, propiedad intelectual y estructuras normativas sólidas para el desarrollo empresarial estable.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-bank2"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Juicios de Amparo</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Protección de última instancia contra actos u omisiones de autoridades gubernamentales que vulneren sus derechos constitucionales fundamentales.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-tree-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Agrario</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Asesoría jurídica especializada en conflictos ejidales, regularización de tierras comunales, sucesiones agrarias y contratos de usufructo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-cash-coin"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Fiscal</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Defensa frente a auditorías fiscales del SAT, acuerdos conclusivos ante PRODECON, medios de defensa y planeación tributaria legal.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom h-100">
+                        <div class="mb-2" style="font-size: 1.5rem; color: var(--verde-pastel);"><i class="bi bi-cart-check-fill"></i></div>
+                        <h3 class="h6 mb-2 font-weight-bold">Derecho Mercantil</h3>
+                        <p class="small text-muted mb-0" style="line-height: 1.4;">Cobranza judicial de pagarés, cheques y títulos de crédito. Litigio contractual comercial y solución de controversias societarias.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto-ubicacion" class="secciones secciones-alternas">
+        <div class="container">
+            <h2 class="titulo-secciones"><i class="bi bi-geo-alt" style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Contacto y Ubicación</h2>
+            <hr class="linea-decorativa">
+            
+            <div class="row align-items-stretch">
+                <div class="col-md-6 mb-4 mb-md-0 d-flex flex-column justify-content-start">
+                    <h3 class="h5 mb-3 font-weight-bold" style="color: var(--verde-pastel);">Estamos listos para ayudarle</h3>
+                    <p class="mb-2" style="font-size: 0.9rem;"><strong>📍 Dirección:</strong> Calle Juan Crisostomo Bonilla #223 Interior 2 C.P. 58147. Colonia Defensores de Puebla, Municipio de Morelia, Mich.</p>
+                    <p class="mb-2" style="font-size: 0.9rem;"><strong>📞 Teléfono:</strong> +52 44 31 58 73 90</p>
+                    <p class="mb-2" style="font-size: 0.9rem;"><strong>✉️ Correo:</strong> juridicomichoacan25@gmail.com</p>
+                    <p class="mb-0" style="font-size: 0.9rem;"><strong>⏰ Horario:</strong> <span>Lunes a Viernes: 9:00 AM - 6:00 PM | Sábados: 10:00 AM - 2:00 PM</span></p>
+                </div>
+                <div class="col-md-6 d-flex align-items-start">
+                    <div class="p-3 w-100" style="background-color: var(--blanco-fondo); border-left: 4px solid var(--verde-pastel); border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.01);">
+                        <h3 class="h6 mb-2 font-weight-bold" style="color: var(--verde-pastel);">Atención Inmediata</h3>
+                        <p class="text-muted small mb-0" style="line-height: 1.6;">
+                            Sabemos que los problemas legales pueden ser complejos. Si prefiere una comunicación más ágil y directa, presione el botón flotante de 
+                            <a href="https://wa.me/524431587390?text=Hola,%20mucho%20gusto.%20Quisiera%20una%20asesor%C3%ADa." target="_blank" rel="noopener noreferrer" class="wa-link-text">WhatsApp</a> 
+                            en la esquina inferior derecha o haga clic aquí. Un especialista le atenderá de inmediato para agendar su cita.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor_elementos">
+                <div id="map"></div>
+                <div class="map-overlay-card">
+                    <h5>Nuestra Oficina</h5>
+                    <p>Morelia, Michoacán</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="btn-mapa-ruta"><i class="fas fa-route"></i> Cómo llegar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-md-left">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-2 mb-md-0">
+                    <p class="mb-0">© 2026 Jurídico Michoacán. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-right text-center" style="font-size: 0.75rem;">
+                    <p class="mb-0 text-muted">Consulte nuestro Aviso de Privacidad | Rigiéndonos bajo las leyes de Michoacán, México.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" id="btnScrollTop" title="Volver Arriba"><i class="fas fa-chevron-up"></i></a>
+    
+    <a href="https://wa.me/524431587390?text=Hola,%20mucho%20gusto.%20Quisiera%20una%20asesor%C3%ADa." class="float-wa" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Inicialización de Mapa Leaflet
+        document.addEventListener("DOMContentLoaded", function() {
+            const lat = 19.711632, lng = -101.235660;
+            const map = L.map('map', { center: [lat, lng], zoom: 17, zoomControl: false, scrollWheelZoom: false });
+            
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+            
+            const markerHtml = `<div style="background-color: #87A99C; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid #FFFFFF; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"><i class="fas fa-map-marker-alt" style="color: #FFFFFF; font-size: 16px;"></i></div>`;
+            L.marker([lat, lng], { icon: L.divIcon({ className: "custom-leaflet-pin", iconSize: [36, 36], iconAnchor: [18, 18], html: markerHtml }) }).addTo(map);
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+            setTimeout(() => { map.invalidateSize(); }, 400);
+            
+            // Lógica para mantener visible el idioma activo al cargar la página
+            const currentHash = window.location.hash;
+            const selector = document.getElementById('languageSelector');
+            if (currentHash.includes('googtrans(es|en)')) {
+                selector.value = 'en';
+            } else if (currentHash.includes('googtrans(es|miw)')) {
+                selector.value = 'pua';
+            } else {
+                selector.value = 'es';
+            }
+        });
+
+        $(document).on('click', '.btn-mapa-ruta', function(e) {
+            e.preventDefault();
+            window.open("https://maps.google.com/?q=19.711632,-101.235660", '_blank', 'noopener,noreferrer');
+        });
+
+        // Configuración del Carrusel (Swiper) para los Profesionistas
+        new Swiper(".mySwiper", {
+            slidesPerView: 1, spaceBetween: 15, watchSlidesProgress: true,
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            breakpoints: { 576: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 992: { slidesPerView: 3 }, 1200: { slidesPerView: 4 } }
+        });
+
+        // Eventos de interfaz nativos
+        window.addEventListener('scroll', () => {
+            document.getElementById('btnScrollTop').classList.toggle('show', window.scrollY > 300);
+        });
+        
+        // Cierre automático del menú colapsable en móviles al dar clic
+        $('.navbar-nav a').click(function() { 
+            $('.navbar-collapse').collapse('hide'); 
+        });
+
+        /* ==========================================================================
+           SISTEMA DE TRADUCCIÓN ESTANDARIZADO POR HERRAMIENTAS WEB GLOBALES
+           ========================================================================== */
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'es',
+                includedLanguages: 'es,en,ih', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        // Manejador del Selector de Idiomas
+        document.getElementById('languageSelector').addEventListener('change', function() {
+            let lang = this.value;
+            let iframe = document.querySelector('.goog-te-menu-frame');
+            if (!iframe) {
+                if(lang === 'en') window.location.hash = '#googtrans(es|en)';
+                else if(lang === 'pua') window.location.hash = '#googtrans(es|miw)'; 
+                else window.location.hash = '#googtrans(es|es)';
+                location.reload();
+                return;
+            }
+            let doc = iframe.contentDocument || iframe.contentWindow.document;
+            let elem = doc.querySelector('.goog-te-menu2-item span.text');
+            if(elem) {
+                elem.click();
+            }
+        });
+    </script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
