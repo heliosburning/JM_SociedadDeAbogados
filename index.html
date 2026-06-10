@@ -371,12 +371,12 @@
    SECCIÓN NUEVA Y REDISEÑADA: CONTACTO Y UBICACIÓN ASIMÉTRICA
    ========================================================================== */
         #contacto-ubicacion {
-            background-color: var(--gris-pastel-claro);
+            background-color: var(--blanco-fondo);
             padding: 60px 0;
         }
 
         .contacto-info-card {
-            background-color: var(--blanco-fondo);
+            background-color: var(--gris-pastel-claro);
             border: 1px solid #E6EAE8;
             border-radius: 6px;
             padding: 30px 24px;
@@ -675,6 +675,53 @@
                 margin-top: 8px;
             }
         }
+/* ==========================================================================
+   ANIMACIÓN UNIFORME DE ROTACIÓN PARA ÍCONOS DE REDES
+   ========================================================================== */
+.card-social-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+    height: 100%; /* Obliga al enlace a ocupar todo el alto disponible */
+}
+
+.card-social-custom {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease !important;
+    border-radius: 4px;
+}
+
+/* Sombra sutil general en hover */
+.card-social-custom:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Configuración de la animación de giro elegante (estilo Threads) */
+.card-social-custom .social-icon-anim {
+    display: inline-block;
+    transition: transform 0.5s ease-in-out, color 0.3s ease;
+}
+
+/* Al hacer hover en cualquier tarjeta, su ícono rotará 360 grados */
+.card-social-custom:hover .social-icon-anim {
+    transform: scale(1.2) rotate(360deg);
+}
+
+/* --- Variaciones de color en Hover (Paleta Oficial de cada App) --- */
+
+.hover-facebook:hover {
+    border-color: #1877F2 !important;
+    background-color: rgba(24, 119, 242, 0.02) !important;
+}
+
+.hover-instagram:hover {
+    border-color: #E1306C !important;
+    background-color: rgba(225, 48, 108, 0.02) !important;
+}
+
+.hover-threads:hover {
+    border-color: #000000 !important;
+    background-color: rgba(0, 0, 0, 0.02) !important;
+}
     </style>
 </head>
 
@@ -718,6 +765,7 @@
                         <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
                         <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#comunidad-redes">Comunidad</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contacto-ubicacion">Contacto</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
                             <select class="lang-select" id="languageSelector" title="Seleccionar Idioma">
@@ -748,6 +796,7 @@
             <h2 class="titulo-secciones"><i class="bi bi-bank"
                     style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Quiénes
                 Somos</h2>
+                <p class="section-subtitle  text-center">Compromiso, experiencia y calidez humana a su servicio.</p>
             <hr class="linea-decorativa">
 
             <div class="row text-top-alignment">
@@ -930,11 +979,12 @@
         </div>
     </section>
 
-    <section id="servicios" class="secciones">
+    <section id="servicios" class="secciones">        
         <div class="container">
             <h2 class="titulo-secciones"><i class="bi bi-briefcase"
                     style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Nuestros
                 Servicios</h2>
+                <p class="section-subtitle text-center">Asesoría e intervención legal estratégica en diversas materias.</p>
             <hr class="linea-decorativa">
             <div class="row match-height">
                 <div class="col-md-4 mb-4">
@@ -1030,14 +1080,69 @@
             </div>
         </div>
     </section>
+<section id="comunidad-redes" class="secciones secciones-alternas">
+        <div class="container text-center">
+            <h2 class="titulo-secciones">
+                <i class="bi bi-share" style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>
+                Comunidad Digital
+            </h2>
+            <p class="section-subtitle">Traducimos el derecho a un lenguaje claro. Conéctese con nosotros.</p>
+            <hr class="linea-decorativa">
+
+            <div class="row mt-4 justify-content-center align-items-stretch">
+                <div class="col-md-4 mb-4">
+                    <a href="https://www.facebook.com/share/1ZdvzVwzoy/" target="_blank" rel="noopener noreferrer" class="card-social-link">
+                        <div class="card card-custom card-social-custom hover-facebook h-100 d-flex flex-column p-4" style="border-top: 3px solid var(--verde-pastel); background: var(--blanco-fondo); box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+                            <div class="mb-3">
+                                <span class="social-icon-anim" style="font-size: 2.2rem; color: #1877F2;"><i class="fab fa-facebook-f"></i></span>
+                            </div>
+                            <h3 class="h6 font-weight-bold mb-2">Facebook</h3>
+                            <p class="small text-muted mb-0" style="line-height: 1.4;">
+                                Siga nuestras publicaciones principales, noticias jurídicas relevantes del estado y transmisiones en vivo.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <a href="https://www.instagram.com/juridico_michoacan?igsh=MWlwdGR0MGJmODBnMQ==" target="_blank" rel="noopener noreferrer" class="card-social-link">
+                        <div class="card card-custom card-social-custom hover-instagram h-100 d-flex flex-column p-4" style="border-top: 3px solid var(--dorado-pastel); background: var(--blanco-fondo); box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+                            <div class="mb-3">
+                                <span class="social-icon-anim" style="font-size: 2.2rem; color: #E1306C;"><i class="fab fa-instagram"></i></span>
+                            </div>
+                            <h3 class="h6 font-weight-bold mb-2">Instagram</h3>
+                            <p class="small text-muted mb-0" style="line-height: 1.4;">
+                                Vea nuestras cápsulas informativas en video, infografías dinámicas y el día a día de nuestra sociedad de abogados.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <a href="https://www.threads.net/@juridico_michoacan" target="_blank" rel="noopener noreferrer" class="card-social-link">
+                        <div class="card card-custom card-social-custom hover-threads h-100 d-flex flex-column p-4" style="border-top: 3px solid var(--negro-solido); background: var(--blanco-fondo); box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+                            <div class="mb-3">
+                                <span class="social-icon-anim" style="font-size: 2.2rem; color: var(--negro-solido);"><i class="fa-brands fa-threads"></i></span>
+                            </div>
+                            <h3 class="h6 font-weight-bold mb-2">Threads</h3>
+                            <p class="small text-muted mb-0" style="line-height: 1.4;">
+                                Lea nuestras opiniones breves, análisis rápidos de reformas legales y debates sobre el panorama jurídico actual.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="contacto-ubicacion" class="secciones">
         <div class="container">
             <h2 class="titulo-secciones">
                 <i class="bi bi-geo-alt"
-                    style="color: var(--verde-pastel); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Contacto
+                    style="color: var(--verde-pastelo); margin-right: 10px; font-size: 1.3rem; vertical-align: middle;"></i>Contacto
                 y Ubicación
             </h2>
+            <p class="section-subtitle text-center">Encuentre el respaldo legal que necesita en nuestras oficinas.</p>
             <hr class="linea-decorativa">
 
             <div class="row align-items-stretch">
@@ -1153,9 +1258,11 @@
             }
         });
 
-        $(document).on('click', '.btn-mapa-ruta', function (e) {
+        // Cambia esto en tu bloque de scripts para que solo afecte al botón dentro del mapa
+        $('#map').on('click', '.btn-mapa-ruta', function (e) {
             e.preventDefault();
             window.open("https://maps.google.com/?q=19.711632,-101.235660", '_blank', 'noopener,noreferrer');
+            // De paso, cambié la URL genérica rota por las coordenadas reales de tu oficina para que sí abra el mapa correcto.
         });
 
         // Configuración del Carrusel (Swiper) para los Profesionistas
